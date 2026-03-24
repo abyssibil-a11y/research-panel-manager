@@ -132,6 +132,7 @@ with gr.Blocks(
     # ── Chat window ───────────────────────────────────────────────
     chatbot = gr.Chatbot(
         value=[],
+        type="tuples",          # keeps the [user, bot] format our code uses
         height=460,
         show_copy_button=True,  # lets users copy Claude's responses
         bubble_full_width=False,  # tighter bubbles, easier to read
