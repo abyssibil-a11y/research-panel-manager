@@ -218,4 +218,4 @@ with gr.Blocks(
 # ─────────────────────────────────────────────
 
 if __name__ == "__main__":
-    app.launch()
+    app.launch(ssr_mode=False)
