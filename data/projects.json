@@ -1,0 +1,90 @@
+[
+  {
+    "id": "PRJ-001",
+    "project_name": "Checkout Flow Optimisation",
+    "research_goal": "Understand where and why users abandon checkout — with a focus on the payment step and account creation friction on mobile",
+    "project_status": "active",
+    "target_participants": 6,
+    "screening_criteria": {
+      "persona": "Regular online shoppers who primarily shop on mobile",
+      "preferred_methods": ["interview", "usability test"],
+      "availability": "flexible"
+    },
+    "participant_pipeline": [
+      {
+        "participant_id": "P001",
+        "status": "completed",
+        "date_added": "2026-03-05"
+      },
+      {
+        "participant_id": "P003",
+        "status": "invited",
+        "date_added": "2026-03-12"
+      },
+      {
+        "participant_id": "P006",
+        "status": "shortlisted",
+        "date_added": "2026-03-14"
+      }
+    ],
+    "notes": "Priority study for Q1. Prototype ready in Figma — coordinate with design team before sessions.",
+    "date_created": "2026-03-05"
+  },
+  {
+    "id": "PRJ-002",
+    "project_name": "Product Discovery & Search UX",
+    "research_goal": "Understand how users search for and discover products — identify where the current search and browse experience creates dead ends or missed finds",
+    "project_status": "active",
+    "target_participants": 5,
+    "screening_criteria": {
+      "persona": "Shoppers who use search or browse categories regularly, not just direct links",
+      "preferred_methods": ["usability test", "interview"],
+      "availability": "flexible"
+    },
+    "participant_pipeline": [
+      {
+        "participant_id": "P007",
+        "status": "invited",
+        "date_added": "2026-03-14"
+      },
+      {
+        "participant_id": "P002",
+        "status": "shortlisted",
+        "date_added": "2026-03-15"
+      },
+      {
+        "participant_id": "P009",
+        "status": "shortlisted",
+        "date_added": "2026-03-16"
+      }
+    ],
+    "notes": "Include at least one participant who uses filters heavily and one who relies on search terms.",
+    "date_created": "2026-03-12"
+  },
+  {
+    "id": "PRJ-003",
+    "project_name": "Returns & Refunds Experience",
+    "research_goal": "Map the end-to-end returns journey from the user's perspective — identify points of confusion, anxiety, and unmet expectations between initiating a return and receiving a refund",
+    "project_status": "planning",
+    "target_participants": 5,
+    "screening_criteria": {
+      "persona": "Shoppers who have made at least one return in the past 3 months",
+      "preferred_methods": ["interview"],
+      "availability": "flexible"
+    },
+    "participant_pipeline": [
+      {
+        "participant_id": "P005",
+        "status": "shortlisted",
+        "date_added": "2026-03-17"
+      },
+      {
+        "participant_id": "P010",
+        "status": "shortlisted",
+        "date_added": "2026-03-18"
+      }
+    ],
+    "notes": "Kicking off in April. Jasmine (P005) has strong opinions on returns — good to start with her.",
+    "date_created": "2026-03-17"
+  }
+]

@@ -1,0 +1,18 @@
+# Environment variables — never commit API keys
+.env
+.env.local
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+
+# macOS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# sample participants
+.csv

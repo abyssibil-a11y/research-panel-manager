@@ -1,0 +1,92 @@
+[
+  {
+    "id": "ORG-001",
+    "name": "Citylight Media",
+    "sector": "Media & marketing",
+    "size": "SME",
+    "website": "",
+    "notes": "Chloe Wright's employer.",
+    "date_added": "2026-03-05"
+  },
+  {
+    "id": "ORG-002",
+    "name": "Westbridge Academy",
+    "sector": "Education",
+    "size": "SME",
+    "website": "",
+    "notes": "Marcus Thompson's employer.",
+    "date_added": "2026-03-06"
+  },
+  {
+    "id": "ORG-003",
+    "name": "Greenfield University",
+    "sector": "Higher education",
+    "size": "Enterprise",
+    "website": "",
+    "notes": "Anika Patel's university.",
+    "date_added": "2026-03-07"
+  },
+  {
+    "id": "ORG-004",
+    "name": "Freelance",
+    "sector": "Independent",
+    "size": "Sole trader",
+    "website": "",
+    "notes": "Catch-all for freelance and self-employed participants — David, Jasmine, Carlos.",
+    "date_added": "2026-03-08"
+  },
+  {
+    "id": "ORG-005",
+    "name": "Orbital Systems",
+    "sector": "Technology",
+    "size": "Scale-up",
+    "website": "",
+    "notes": "Noah Fitzgerald's employer.",
+    "date_added": "2026-03-09"
+  },
+  {
+    "id": "ORG-006",
+    "name": "Fairview Logistics",
+    "sector": "Logistics",
+    "size": "SME",
+    "website": "",
+    "notes": "Priya Sharma's employer.",
+    "date_added": "2026-03-10"
+  },
+  {
+    "id": "ORG-007",
+    "name": "Pinnacle Financial",
+    "sector": "Financial services",
+    "size": "Enterprise",
+    "website": "",
+    "notes": "Tom Adeyemi's employer. Note: Tom is do-not-contact.",
+    "date_added": "2026-03-10"
+  },
+  {
+    "id": "ORG-008",
+    "name": "Northgate Group",
+    "sector": "Professional services",
+    "size": "Enterprise",
+    "website": "",
+    "notes": "Emma Larsson's employer.",
+    "date_added": "2026-03-11"
+  },
+  {
+    "id": "ORG-009",
+    "name": "Studio North",
+    "sector": "Creative",
+    "size": "Micro-business",
+    "website": "",
+    "notes": "Lily Park's employer.",
+    "date_added": "2026-03-13"
+  },
+  {
+    "id": "ORG-010",
+    "name": "Delta Storage Ltd",
+    "sector": "Warehousing & logistics",
+    "size": "SME",
+    "website": "",
+    "notes": "Robert Okafor's employer.",
+    "date_added": "2026-03-14"
+  }
+]

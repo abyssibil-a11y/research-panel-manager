@@ -1,0 +1,5 @@
+anthropic
+gradio==4.20.0
+gradio_client==0.11.0
+resend
+python-dotenv
