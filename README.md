@@ -1,8 +1,8 @@
 ---
 title: Research Panel Manager
 emoji: 🧑‍🔬
-colorFrom: violet
-colorTo: purple
+colorFrom: purple
+colorTo: indigo
 sdk: gradio
 sdk_version: 4.20.0
 app_file: app.py
@@ -62,8 +62,8 @@ Send drafted emails directly via [Resend](https://resend.com) — with a human r
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/user-panel-manager.git
-cd user-panel-manager
+git clone https://github.com/abyssibil-a11y/research-panel-manager.git
+cd research-panel-manager
 ```
 
 ### 2. Install dependencies
@@ -98,7 +98,7 @@ jupyter notebook main.ipynb
 ## Project structure
 
 ```
-user-panel-manager/
+research-panel-manager/
 ├── agent.py          # Agent loop + ChatSession class
 ├── tools.py          # All tools (data read/write + Claude-powered operations)
 ├── app.py            # Gradio UI
@@ -189,7 +189,7 @@ Multi-turn conversation memory is handled by `ChatSession`, which maintains mess
 ---
 
 ### 7. Organisation linked by both ID and display name
-**Decision:** Participants store both `organisation_id` (`"ORG-001"`) and `organisation` (`"Spotify"`).
+**Decision:** Participants store both `organisation_id` (`"ORG-001"`) and `organisation` (`"Citylight Media"`).
 
 **Why:** The display name is immediately readable without a lookup. The ID enables proper relational linking — e.g. "find all participants from this company."
 
