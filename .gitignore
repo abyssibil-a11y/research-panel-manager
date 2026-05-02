@@ -14,5 +14,5 @@ __pycache__/
 # Jupyter
 .ipynb_checkpoints/
 
-# sample participants
-.csv
+# casestudy
+case_study.md

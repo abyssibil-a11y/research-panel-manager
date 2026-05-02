@@ -45,6 +45,21 @@ Send drafted emails directly via [Resend](https://resend.com) — with a human r
 
 ---
 
+## Why this matters
+
+Product researchers spend **3–5 hours per study** manually:
+- Screening HubSpot/Airtable for qualified participants
+- Drafting personalized outreach emails
+- Tracking who's participated recently (to avoid over-recruiting)
+- Extracting insights from messy session notes
+
+This tool automates the tedious parts while keeping researchers in control of the human parts (deciding who to contact, approving messages before sending).
+
+**Time saved per study: ~3 hours**  
+**Quality improvement: Better participant matching, more personalized outreach**
+
+---
+
 ## Stack
 
 | Layer | Tool | Why |
@@ -92,6 +107,16 @@ Or explore in the notebook:
 ```bash
 jupyter notebook main.ipynb
 ```
+
+### 5. Try it out
+
+Once running:
+1. **Add a participant** (use the "Participants" tab or import `sample_participants.csv`)
+2. **Create a project** with target criteria (e.g., "Need 5 PMs for mobile usability study")
+3. **Ask the agent** in the chat: "Screen the panel for this project and show me the top matches"
+4. **Review** the agent's reasoning and draft outreach emails
+
+The agent will explain *why* each participant is a good or poor fit, not just return a list.
 
 ---
 
@@ -229,6 +254,22 @@ Multi-turn conversation memory is handled by `ChatSession`, which maintains mess
 The repo includes sample JSON files with fictional participants, projects, and organisations so you can explore the agent immediately without adding your own data.
 
 A `sample_participants.csv` template is also included for testing the CSV import feature.
+
+---
+
+## What I learned building this
+
+**Agent reasoning is powerful but unpredictable**  
+The screening tool works beautifully when criteria are clear ("PMs with 5+ years experience"). It struggles when criteria are vague ("someone innovative"). The lesson: agents need structured inputs, not open-ended requests.
+
+**Human-in-the-loop is essential for actions with external impact**  
+Drafting an email is safe to automate. *Sending* an email requires human approval. This pattern (AI drafts, human approves) is the right model for operational AI.
+
+**JSON files are the right choice at this scale**  
+For 10–100 participants, JSON is simple and readable. The moment you need search/filtering/concurrency, migrate to SQLite. Know when to graduate to the next tier.
+
+**Tool use is the core of agent capability**  
+The agent doesn't "know" anything about participants. It calls tools that read the data, reasons over results, and calls more tools. The more reliable your tools, the more reliable your agent.
 
 ---
 
