@@ -78,7 +78,7 @@ This tool automates the tedious parts while keeping researchers in control of th
 
 ---
 
-## Getting started
+## Using in chat UI
 
 ### 1. Clone the repo
 
@@ -123,67 +123,6 @@ Once running:
 4. **Review** the agent's reasoning and draft outreach emails
 
 The agent will explain *why* each participant is a good or poor fit, not just return a list.
-
----
-
-## Project structure
-
-```
-research-panel-manager/
-├── agent.py               # Agent loop + ChatSession (used by Gradio UI)
-├── tools.py               # Conversational formatting layer (Gradio UI only)
-├── tools_data.py          # Pure data layer — all JSON read/write, no AI
-├── tools_ai.py            # AI layer — structured Claude calls, forced tool use
-├── mcp_server.py          # MCP server — exposes 6 tools to Claude Desktop
-├── app.py                 # Gradio chat UI
-├── pyproject.toml         # uv dependencies for the MCP server (Python 3.11)
-├── mcp_config_example.json  # Copy-paste config for Claude Desktop
-├── test_mcp_tools.py      # Integration tests for all 6 MCP tools
-├── main.ipynb             # Step-by-step notebook walkthrough
-├── data/
-│   ├── participants.json
-│   ├── projects.json
-│   └── organisations.json
-└── sample_participants.csv
-```
-
----
-
-## Architecture
-
-The project uses a three-layer architecture with two client surfaces:
-
-```
-┌─────────────────────────────────────────────────────┐
-│  Clients                                             │
-│  ┌──────────────────┐    ┌────────────────────────┐ │
-│  │  Gradio chat UI  │    │  Claude Desktop / MCP  │ │
-│  │  (app.py)        │    │  (mcp_server.py)        │ │
-│  └────────┬─────────┘    └───────────┬────────────┘ │
-└───────────┼──────────────────────────┼──────────────┘
-            │                          │
-            ▼                          │
-   agent.py + tools.py                 │
-   (conversational strings)            │
-            │                          │
-            └──────────┬───────────────┘
-                       ▼
-          ┌────────────────────────┐
-          │  tools_ai.py           │  ← AI operations
-          │  (forced tool use,     │     (screen, draft,
-          │   structured output)   │      insights, summary)
-          └────────────┬───────────┘
-                       │
-          ┌────────────▼───────────┐
-          │  tools_data.py         │  ← Pure data layer
-          │  (JSON read/write,     │     (participants,
-          │   no AI logic)         │      projects, orgs)
-          └────────────────────────┘
-```
-
-**Key design principle:** `tools_data.py` and `tools_ai.py` return clean structured dicts — no prose, no formatting. The Gradio path (via `tools.py`) wraps those into conversational strings. The MCP path uses the structured dicts directly.
-
-Multi-turn conversation memory is handled by `ChatSession` in `agent.py`, which maintains message history with an optional sliding window (`max_turns`) to control token usage.
 
 ---
 
@@ -247,6 +186,67 @@ uv run test_mcp_tools.py
 ```
 
 Runs 32 checks across all 6 tools and cleans up any test data it creates.
+
+---
+
+## Project structure
+
+```
+research-panel-manager/
+├── agent.py               # Agent loop + ChatSession (used by Gradio UI)
+├── tools.py               # Conversational formatting layer (Gradio UI only)
+├── tools_data.py          # Pure data layer — all JSON read/write, no AI
+├── tools_ai.py            # AI layer — structured Claude calls, forced tool use
+├── mcp_server.py          # MCP server — exposes 6 tools to Claude Desktop
+├── app.py                 # Gradio chat UI
+├── pyproject.toml         # uv dependencies for the MCP server (Python 3.11)
+├── mcp_config_example.json  # Copy-paste config for Claude Desktop
+├── test_mcp_tools.py      # Integration tests for all 6 MCP tools
+├── main.ipynb             # Step-by-step notebook walkthrough
+├── data/
+│   ├── participants.json
+│   ├── projects.json
+│   └── organisations.json
+└── sample_participants.csv
+```
+
+---
+
+## Architecture
+
+The project uses a three-layer architecture with two client surfaces:
+
+```
+┌─────────────────────────────────────────────────────┐
+│  Clients                                             │
+│  ┌──────────────────┐    ┌────────────────────────┐ │
+│  │  Gradio chat UI  │    │  Claude Desktop / MCP  │ │
+│  │  (app.py)        │    │  (mcp_server.py)        │ │
+│  └────────┬─────────┘    └───────────┬────────────┘ │
+└───────────┼──────────────────────────┼──────────────┘
+            │                          │
+            ▼                          │
+   agent.py + tools.py                 │
+   (conversational strings)            │
+            │                          │
+            └──────────┬───────────────┘
+                       ▼
+          ┌────────────────────────┐
+          │  tools_ai.py           │  ← AI operations
+          │  (forced tool use,     │     (screen, draft,
+          │   structured output)   │      insights, summary)
+          └────────────┬───────────┘
+                       │
+          ┌────────────▼───────────┐
+          │  tools_data.py         │  ← Pure data layer
+          │  (JSON read/write,     │     (participants,
+          │   no AI logic)         │      projects, orgs)
+          └────────────────────────┘
+```
+
+**Key design principle:** `tools_data.py` and `tools_ai.py` return clean structured dicts — no prose, no formatting. The Gradio path (via `tools.py`) wraps those into conversational strings. The MCP path uses the structured dicts directly.
+
+Multi-turn conversation memory is handled by `ChatSession` in `agent.py`, which maintains message history with an optional sliding window (`max_turns`) to control token usage.
 
 ---
 
