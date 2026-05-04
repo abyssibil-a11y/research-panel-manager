@@ -1,14 +1,17 @@
 # agent.py
 #
-# 💡 This file is almost identical to the one in your customer service chatbot!
-#    The agent loop doesn't care what the tools do — it just:
-#      1. Sends your message to Claude
-#      2. Runs whatever tool Claude asks for
-#      3. Sends the result back
-#      4. Repeats until Claude has a final answer
+# 💡 ROLE IN THE REFACTORED ARCHITECTURE:
+#    This file is the orchestration layer. It decides WHICH tools to call
+#    based on natural language, runs them, and presents results to the user.
 #
-#    This is the power of the pattern — you only need to change tools.py
-#    to build a completely different agent.
+#    It no longer does any AI reasoning about research content — that has
+#    moved into tools_ai.py. Claude here acts as a router and communicator:
+#
+#      User message
+#        → Claude picks the right tool(s)
+#          → tool runs (data op via tools_data, or AI op via tools_ai)
+#            → result returned as structured string
+#              → Claude presents it clearly to the researcher
 #
 # 💡 TWO WAYS TO USE THIS AGENT:
 #
@@ -18,23 +21,27 @@
 #    session = ChatSession()       → multi-turn, remembers the whole conversation
 #    session.chat("your message")    good for follow-up requests and context-heavy tasks
 
+import os
+
 import anthropic
 from dotenv import load_dotenv
 from tools import TOOLS, run_tool
 
-load_dotenv(".env.local")
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env.local"), override=True)
 client = anthropic.Anthropic()
 
 SYSTEM_PROMPT = """You are a helpful user research panel manager assistant.
-You help researchers manage their participant panel across the full research workflow:
-adding participants, creating projects, screening candidates, and drafting outreach emails.
+You help researchers manage their participant panel: adding participants, tracking projects,
+screening candidates, drafting outreach, and capturing session insights.
 
 Guidelines:
-- When adding participants, confirm what was saved.
-- When screening, assess holistically — consider role, seniority, methods, and availability together.
-  Shortlist the best matches and briefly explain your reasoning for each.
-- When drafting emails, write warmly and personally. Reference the participant's actual role
-  and the project's real goal. Never sound like a template.
+- When adding or updating participants, confirm clearly what was saved.
+- When screening: the tool ranks participants by AI fit score — present the top candidates
+  and offer to add them to the project pipeline with add_to_pipeline.
+- When drafting emails: the tool writes the email — present the subject and body for the
+  researcher to review, then offer to send it with send_outreach_email.
+- When extracting session insights: the tool handles extraction automatically — present
+  the insights and highlight any important follow-up items.
 - Always be concise and friendly."""
 
 

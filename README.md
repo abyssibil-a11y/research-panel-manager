@@ -15,6 +15,10 @@ An AI-powered research ops tool that helps product teams manage participants, ru
 
 Built with the Anthropic Claude API, Python, and Gradio. Designed as a portfolio project exploring how AI agents can accelerate product workflows.
 
+**Two ways to use it:**
+- **Chat UI** — run `python3 app.py` for a conversational Gradio interface
+- **MCP server** — connect it to Claude Desktop or any MCP-compatible agent and call the tools directly
+
 ---
 
 ## What it does
@@ -64,11 +68,13 @@ This tool automates the tedious parts while keeping researchers in control of th
 
 | Layer | Tool | Why |
 |---|---|---|
-| AI reasoning | [Anthropic Claude API](https://anthropic.com) | Tool use + natural language reasoning |
-| UI | [Gradio](https://gradio.app) | Python-native, fast to build, deployable to HF Spaces |
+| AI reasoning | [Anthropic Claude API](https://anthropic.com) | Tool use + forced structured output |
+| Chat UI | [Gradio](https://gradio.app) | Python-native, fast to build, deployable to HF Spaces |
+| MCP server | [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) | Expose tools to Claude Desktop and other AI agents |
+| Runtime | [uv](https://github.com/astral-sh/uv) | Manages Python 3.11 for the MCP server without touching the system Python |
 | Email | [Resend](https://resend.com) | Simple and free API |
 | Data | JSON files | Human-readable, zero setup, right for this scale |
-| Language | Python 3 | Consistent with the Anthropic SDK |
+| Language | Python 3.9 (UI) / 3.11 (MCP) | 3.11 required by MCP SDK |
 
 ---
 
@@ -84,7 +90,7 @@ cd research-panel-manager
 ### 2. Install dependencies
 
 ```bash
-pip install anthropic gradio==4.20.0 gradio_client==0.11.0 resend python-dotenv
+pip install anthropic gradio resend python-dotenv
 ```
 
 ### 3. Set up environment variables
@@ -124,10 +130,16 @@ The agent will explain *why* each participant is a good or poor fit, not just re
 
 ```
 research-panel-manager/
-├── agent.py          # Agent loop + ChatSession class
-├── tools.py          # All tools (data read/write + Claude-powered operations)
-├── app.py            # Gradio UI
-├── main.ipynb        # Step-by-step notebook walkthrough (Phases 1–8)
+├── agent.py               # Agent loop + ChatSession (used by Gradio UI)
+├── tools.py               # Conversational formatting layer (Gradio UI only)
+├── tools_data.py          # Pure data layer — all JSON read/write, no AI
+├── tools_ai.py            # AI layer — structured Claude calls, forced tool use
+├── mcp_server.py          # MCP server — exposes 6 tools to Claude Desktop
+├── app.py                 # Gradio chat UI
+├── pyproject.toml         # uv dependencies for the MCP server (Python 3.11)
+├── mcp_config_example.json  # Copy-paste config for Claude Desktop
+├── test_mcp_tools.py      # Integration tests for all 6 MCP tools
+├── main.ipynb             # Step-by-step notebook walkthrough
 ├── data/
 │   ├── participants.json
 │   ├── projects.json
@@ -139,21 +151,102 @@ research-panel-manager/
 
 ## Architecture
 
-The project follows a clean separation between **data** and **intelligence**:
-
-- **Tools** handle all reading and writing to JSON files. They are predictable, testable, and have no AI logic in them.
-- **Claude** handles all reasoning — screening participants, ranking by fit, drafting emails, extracting insights from notes.
-- **The agent loop** in `agent.py` connects them: it passes the conversation and available tools to Claude, executes whichever tools Claude calls, and loops until Claude returns a final answer.
+The project uses a three-layer architecture with two client surfaces:
 
 ```
-User message
-    → Claude reasons + selects tool(s)
-        → Tool executes (reads/writes data)
-            → Result returned to Claude
-                → Claude reasons again or returns final answer
+┌─────────────────────────────────────────────────────┐
+│  Clients                                             │
+│  ┌──────────────────┐    ┌────────────────────────┐ │
+│  │  Gradio chat UI  │    │  Claude Desktop / MCP  │ │
+│  │  (app.py)        │    │  (mcp_server.py)        │ │
+│  └────────┬─────────┘    └───────────┬────────────┘ │
+└───────────┼──────────────────────────┼──────────────┘
+            │                          │
+            ▼                          │
+   agent.py + tools.py                 │
+   (conversational strings)            │
+            │                          │
+            └──────────┬───────────────┘
+                       ▼
+          ┌────────────────────────┐
+          │  tools_ai.py           │  ← AI operations
+          │  (forced tool use,     │     (screen, draft,
+          │   structured output)   │      insights, summary)
+          └────────────┬───────────┘
+                       │
+          ┌────────────▼───────────┐
+          │  tools_data.py         │  ← Pure data layer
+          │  (JSON read/write,     │     (participants,
+          │   no AI logic)         │      projects, orgs)
+          └────────────────────────┘
 ```
 
-Multi-turn conversation memory is handled by `ChatSession`, which maintains message history with an optional sliding window (`max_turns`) to control token usage.
+**Key design principle:** `tools_data.py` and `tools_ai.py` return clean structured dicts — no prose, no formatting. The Gradio path (via `tools.py`) wraps those into conversational strings. The MCP path uses the structured dicts directly.
+
+Multi-turn conversation memory is handled by `ChatSession` in `agent.py`, which maintains message history with an optional sliding window (`max_turns`) to control token usage.
+
+---
+
+## Using as an MCP server
+
+Connect the panel manager directly to Claude Desktop so you can call its tools from any conversation — no chat UI needed.
+
+### 1. Install uv
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+uv manages Python 3.11 and the MCP dependencies without touching your system Python.
+
+### 2. Configure Claude Desktop
+
+Open `~/Library/Application Support/Claude/claude_desktop_config.json` and add the `mcpServers` block (adjust the paths to match your machine):
+
+```json
+{
+  "mcpServers": {
+    "research-panel-manager": {
+      "command": "/Users/YOUR_USERNAME/.local/bin/uv",
+      "args": [
+        "run",
+        "--python", "3.11",
+        "--with", "mcp",
+        "--with", "anthropic",
+        "--with", "python-dotenv",
+        "/absolute/path/to/research-panel-manager/mcp_server.py"
+      ]
+    }
+  }
+}
+```
+
+A ready-to-edit template is in `mcp_config_example.json`.
+
+### 3. Restart Claude Desktop
+
+The six tools will be available in any new conversation.
+
+### Available MCP tools
+
+| Tool | Description | Key parameters |
+|---|---|---|
+| `screen_participants` | AI ranks all active panel members by fit | `project_id` |
+| `draft_outreach_email` | AI writes a personalised recruitment email | `participant_id`, `project_id` |
+| `extract_session_insights` | Processes raw notes → structured insights | `participant_id`, `project_id`, `raw_notes` |
+| `check_participation_history` | Returns a participant's full project history | `participant_id` |
+| `add_participant_to_panel` | Adds a new participant to the panel | `name`, `email`, `job_role`, `seniority_level`, `preferred_methods`, `availability` |
+| `get_participant_details` | Looks up a participant by ID or name | `query` |
+
+All tools return structured JSON with a `success` boolean and an `error` string on failure.
+
+### Test the server
+
+```bash
+uv run test_mcp_tools.py
+```
+
+Runs 32 checks across all 6 tools and cleans up any test data it creates.
 
 ---
 
@@ -240,12 +333,21 @@ Multi-turn conversation memory is handled by `ChatSession`, which maintains mess
 
 ---
 
-### 10. Pinned Gradio to 4.20.0
-**Decision:** `gradio==4.20.0` and `gradio_client==0.11.0` are pinned in dependencies.
+### 10. MCP server runs on Python 3.11, Gradio UI runs on Python 3.9
 
-**Why:** During development, `gradio 4.44.1` paired with `gradio_client 1.3.0` had a compatibility bug that broke the UI with a `TypeError`. Pinning to a known-good version pair was the pragmatic fix.
+**Decision:** The MCP server (`mcp_server.py`) uses Python 3.11 via `uv`. The Gradio UI (`app.py`) runs on the system Python 3.9. They are separate processes.
 
-**The lesson:** Dependencies can break each other silently. Pin versions explicitly and test upgrades intentionally.
+**Why:** The MCP Python SDK requires Python 3.10+. Rather than force-upgrading the whole project (and breaking existing Gradio compatibility), `uv` manages a separate Python 3.11 environment just for the MCP server. The data files they share are plain JSON — no compatibility issues.
+
+**The lesson:** Polyglot runtime environments are normal. `uv` makes this painless — no virtualenv juggling, no system Python conflicts.
+
+### 11. Forced tool use for guaranteed structured output
+
+**Decision:** The AI layer (`tools_ai.py`) uses `tool_choice={"type": "tool", "name": "submit_result"}` to force Claude to return a specific JSON schema, rather than asking it to "reply in JSON".
+
+**Why:** When you ask Claude to "reply in JSON", it might wrap the response in prose, vary the schema, or return markdown fences. Forced tool use is more reliable: Claude is trained to fill tool schemas accurately, so the output is consistent and parseable every time.
+
+**The lesson:** The right abstraction for "I need structured data from an LLM" is tool use with a locked schema — not prompt engineering around JSON formatting.
 
 ---
 

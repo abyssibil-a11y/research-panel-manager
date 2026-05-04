@@ -1,3 +1,4 @@
 anthropic
+gradio>=4.36.0
 resend
 python-dotenv

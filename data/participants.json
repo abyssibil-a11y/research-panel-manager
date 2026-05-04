@@ -8,7 +8,10 @@
     "organisation": "Citylight Media",
     "organisation_id": "ORG-001",
     "seniority_level": "Mid",
-    "preferred_methods": ["interview", "usability test"],
+    "preferred_methods": [
+      "interview",
+      "usability test"
+    ],
     "availability": "Tuesday and Thursday mornings",
     "status": "active",
     "last_touchpoint": "interview",
@@ -22,7 +25,7 @@
         "notes": "Great session. Chloe walked us through her full checkout experience with real examples."
       }
     ],
-    "notes": "She/her. Shops online 3-4x per week, mostly on mobile. Highly opinionated about checkout UX — has abandoned many carts. Very articulate participant.",
+    "notes": "She/her. Shops online 3-4x per week, mostly on mobile. Highly opinionated about checkout UX \u2014 has abandoned many carts. Very articulate participant.",
     "date_added": "2026-03-05",
     "session_insights": [
       {
@@ -31,20 +34,20 @@
         "date": "2026-03-15",
         "raw_notes": "Chloe shared that she almost always abandons checkout if she has to create an account. Said she has 'account fatigue' from too many sign-ups. The guest checkout option on our app is hidden below the login form which she never noticed - she thought it wasn't possible. Big moment: when asked to complete a test purchase she spent 40 seconds looking for an apple pay or google pay button - said 'I never type my card details on my phone, it's too fiddly and I don't trust it'. Also flagged that the order summary disappears when you scroll down on the payment screen - she lost track of what she was buying. Quote: 'If I have to type my card number on a tiny keyboard I'm already annoyed before I've bought anything'. Said she'd recommend the app to friends if checkout was faster.",
         "key_insights": [
-          "Guest checkout option is invisible — placed below the login form, users assume it doesn't exist",
-          "Strong preference for one-tap payment (Apple Pay / Google Pay) on mobile — typing card details feels fiddly and untrustworthy",
-          "Order summary should remain visible (sticky) during the payment step — users lose context when it disappears on scroll",
-          "Account creation fatigue is real — forced sign-up is the primary abandonment trigger for frequent online shoppers"
+          "Guest checkout option is invisible \u2014 placed below the login form, users assume it doesn't exist",
+          "Strong preference for one-tap payment (Apple Pay / Google Pay) on mobile \u2014 typing card details feels fiddly and untrustworthy",
+          "Order summary should remain visible (sticky) during the payment step \u2014 users lose context when it disappears on scroll",
+          "Account creation fatigue is real \u2014 forced sign-up is the primary abandonment trigger for frequent online shoppers"
         ],
         "follow_up_items": [
-          "Redesign guest checkout CTA — make it equal prominence to the login option",
+          "Redesign guest checkout CTA \u2014 make it equal prominence to the login option",
           "Prioritise Apple Pay / Google Pay integration in the next sprint",
           "Make order summary sticky on the payment screen",
-          "Chloe is happy to review a redesigned prototype — flag for concept testing round"
+          "Chloe is happy to review a redesigned prototype \u2014 flag for concept testing round"
         ],
         "quotes": [
           "If I have to type my card number on a tiny keyboard I'm already annoyed before I've bought anything",
-          "I didn't even know guest checkout was an option — I thought you had to sign up"
+          "I didn't even know guest checkout was an option \u2014 I thought you had to sign up"
         ]
       }
     ]
@@ -58,7 +61,10 @@
     "organisation": "Westbridge Academy",
     "organisation_id": "ORG-002",
     "seniority_level": "Mid",
-    "preferred_methods": ["interview", "diary study"],
+    "preferred_methods": [
+      "interview",
+      "diary study"
+    ],
     "availability": "weekday evenings after 6pm",
     "status": "active",
     "last_touchpoint": "",
@@ -76,14 +82,42 @@
     "organisation": "Greenfield University",
     "organisation_id": "ORG-003",
     "seniority_level": "Junior",
-    "preferred_methods": ["usability test", "interview"],
-    "availability": "flexible — prefers afternoons",
+    "preferred_methods": [
+      "usability test",
+      "interview"
+    ],
+    "availability": "flexible \u2014 prefers afternoons",
     "status": "active",
     "last_touchpoint": "",
     "last_touchpoint_date": "",
     "participation_history": [],
     "notes": "She/her. 22 years old. Shops almost exclusively on mobile. Price-compares across apps before buying. Heavy social commerce user (TikTok Shop, Instagram).",
-    "date_added": "2026-03-07"
+    "date_added": "2026-03-07",
+    "session_insights": [
+      {
+        "project_id": "PRJ-001",
+        "project_name": "Checkout Flow Optimisation",
+        "date": "2026-05-04",
+        "raw_notes": "\nanika session - checkout flow proj\ntalked for about 45 mins\nshe shops mostly on mobile, does a lot of impulse buys\nbiggest thing: she always checks the return policy before buying but its REALLY hard to find on mobile\nlike she has to scroll forever to the footer\nalso payment - she uses apple pay for everything but loads of sites dont support it\nwhen that happens she just... leaves. abandons the cart\nshe mentioned she had a bad experience last month, tried to buy shoes, couldnt find return policy, \nthen apple pay wasnt available, ended up going to competitor\noh also she said the checkout progress bar is helpful - she likes knowing how many steps left\nwants to know: will guest checkout save her details for next time? she doesnt like creating accounts\nfollow up: send her the prototype link for mobile checkout flow\nalso she said she knows 2 other friends who have same frustrations, ask if she can refer them??\n",
+        "key_insights": [
+          "Return policy visibility is a pre-purchase blocker on mobile: Anika actively seeks return policy information before buying but finds it buried in the footer, requiring excessive scrolling on mobile devices",
+          "Missing Apple Pay support directly causes cart abandonment: When preferred payment method (Apple Pay) isn't available, Anika leaves immediately rather than entering card details manually",
+          "Competitor defection happens when multiple friction points compound: The combination of hard-to-find return policy AND missing Apple Pay caused Anika to abandon and purchase from a competitor instead",
+          "Checkout progress indicators provide reassurance: Visible step indicators help users understand remaining effort and reduce anxiety during checkout",
+          "Guest checkout expectations are unclear: Users like Anika want guest checkout but are uncertain whether their details will be saved for future purchases, creating hesitation around account creation"
+        ],
+        "follow_up_items": [
+          "Send Anika the mobile checkout flow prototype link for feedback",
+          "Ask if she can refer her 2 friends with similar frustrations for additional research sessions",
+          "Explore: What would make guest checkout more appealing? Does she want optional detail-saving without full account creation?",
+          "Probe deeper on Apple Pay abandonment: Does she ever complete purchase with manual card entry, or is it always abandonment?"
+        ],
+        "quotes": [
+          "When that happens she just... leaves. Abandons the cart",
+          "Will guest checkout save her details for next time?"
+        ]
+      }
+    ]
   },
   {
     "id": "P004",
@@ -94,7 +128,9 @@
     "organisation": "Freelance",
     "organisation_id": "ORG-004",
     "seniority_level": "Senior",
-    "preferred_methods": ["usability test"],
+    "preferred_methods": [
+      "usability test"
+    ],
     "availability": "weekday mornings",
     "status": "active",
     "last_touchpoint": "",
@@ -108,11 +144,14 @@
     "name": "Jasmine Lee",
     "email": "jasmine.lee@me.com",
     "job_role": "Freelance Photographer",
-    "persona": "Power user — shops across many categories",
+    "persona": "Power user \u2014 shops across many categories",
     "organisation": "Freelance",
     "organisation_id": "ORG-004",
     "seniority_level": "Mid",
-    "preferred_methods": ["interview", "concept testing"],
+    "preferred_methods": [
+      "interview",
+      "concept testing"
+    ],
     "availability": "Monday and Wednesday mornings",
     "status": "active",
     "last_touchpoint": "",
@@ -130,14 +169,41 @@
     "organisation": "Orbital Systems",
     "organisation_id": "ORG-005",
     "seniority_level": "Mid",
-    "preferred_methods": ["interview", "concept testing"],
+    "preferred_methods": [
+      "interview",
+      "concept testing"
+    ],
     "availability": "Friday afternoons",
     "status": "active",
     "last_touchpoint": "",
     "last_touchpoint_date": "",
     "participation_history": [],
-    "notes": "He/him. Tries new apps early. Notices technical details others miss — broken animations, slow load states, inconsistent UI. Useful for finding edge cases.",
-    "date_added": "2026-03-09"
+    "notes": "He/him. Tries new apps early. Notices technical details others miss \u2014 broken animations, slow load states, inconsistent UI. Useful for finding edge cases.",
+    "date_added": "2026-03-09",
+    "session_insights": [
+      {
+        "project_id": "PRJ-001",
+        "project_name": "Checkout Flow Optimisation",
+        "date": "2026-05-04",
+        "raw_notes": "\nmcp test session - noah jenkins - checkout flow project\n~40 min session, ran a bit over\n\nnoah shops maybe 2-3x per month online, mostly electronics and hobby stuff\nmain friction: saved cards stop working after a while?? he has to re-enter them\nalso said he always checks if site has paypal before he adds to cart\nif no paypal he usually doesn't bother unless it's something he really wants\n\ninteresting: he described the progress bar on checkout as \"a loading bar for my money\"\nthought it was funny but actually said it helps him not abandon\n\nhe doesn't read return policies - just assumes big sites are fine\nbuys based on delivery speed, same/next day is a dealbreaker criteria for him\n\ngot distracted talking about his last bad experience - bought something,\nno confirmation email came, thought it failed, bought again, ended up with 2\nfollow up on: does he want sms vs email confirmation?\nand: would saved address/card across sessions change his behaviour?\n",
+        "key_insights": [
+          "Payment method availability (specifically PayPal) is a gate-check before adding to cart \u2014 Noah will abandon before even starting if his preferred payment isn't available",
+          "Saved payment credentials degrading over time creates repeat friction \u2014 cards 'stop working' forcing re-entry, which erodes the value of account creation",
+          "Visual progress indicators during checkout reduce abandonment \u2014 Noah specifically cited the progress bar as helping him complete purchases",
+          "Delivery speed (same/next day) is a hard requirement that influences purchase decisions more than price or return policies",
+          "Missing order confirmation triggers duplicate purchases \u2014 lack of immediate feedback led Noah to re-purchase, creating a support burden and trust issue"
+        ],
+        "follow_up_items": [
+          "Explore preference for SMS vs email order confirmation \u2014 which channel does he trust/check faster?",
+          "Test whether persistent saved addresses and cards across sessions would reduce his checkout friction and increase purchase frequency",
+          "Dig deeper into the 'saved cards stop working' issue \u2014 is this session expiry, tokenization, or security re-verification?",
+          "Understand threshold for 'really wanting' something that overrides lack of PayPal \u2014 what product/price triggers override his usual abandonment?"
+        ],
+        "quotes": [
+          "a loading bar for my money"
+        ]
+      }
+    ]
   },
   {
     "id": "P007",
@@ -148,13 +214,16 @@
     "organisation": "Fairview Logistics",
     "organisation_id": "ORG-006",
     "seniority_level": "Senior",
-    "preferred_methods": ["interview", "usability test"],
+    "preferred_methods": [
+      "interview",
+      "usability test"
+    ],
     "availability": "Saturday mornings",
     "status": "active",
     "last_touchpoint": "",
     "last_touchpoint_date": "",
     "participation_history": [],
-    "notes": "She/her. Parent of 3. Shops in short bursts between tasks — speed and saved preferences matter a lot. Frequently uses wish lists and saved carts.",
+    "notes": "She/her. Parent of 3. Shops in short bursts between tasks \u2014 speed and saved preferences matter a lot. Frequently uses wish lists and saved carts.",
     "date_added": "2026-03-10"
   },
   {
@@ -166,7 +235,10 @@
     "organisation": "Pinnacle Financial",
     "organisation_id": "ORG-007",
     "seniority_level": "Junior",
-    "preferred_methods": ["survey", "interview"],
+    "preferred_methods": [
+      "survey",
+      "interview"
+    ],
     "availability": "flexible",
     "status": "do-not-contact",
     "last_touchpoint": "survey",
@@ -184,13 +256,15 @@
     "organisation": "Northgate Group",
     "organisation_id": "ORG-008",
     "seniority_level": "Senior",
-    "preferred_methods": ["interview"],
+    "preferred_methods": [
+      "interview"
+    ],
     "availability": "Thursday mornings",
     "status": "active",
     "last_touchpoint": "",
     "last_touchpoint_date": "",
     "participation_history": [],
-    "notes": "She/her. Shops deliberately — researches before buying. Cares about data privacy and clear returns policies. Good for testing information hierarchy and trust-building content.",
+    "notes": "She/her. Shops deliberately \u2014 researches before buying. Cares about data privacy and clear returns policies. Good for testing information hierarchy and trust-building content.",
     "date_added": "2026-03-11"
   },
   {
@@ -202,7 +276,10 @@
     "organisation": "Freelance",
     "organisation_id": "ORG-004",
     "seniority_level": "Mid",
-    "preferred_methods": ["usability test", "interview"],
+    "preferred_methods": [
+      "usability test",
+      "interview"
+    ],
     "availability": "weekday mornings before 10am",
     "status": "active",
     "last_touchpoint": "",
@@ -220,13 +297,16 @@
     "organisation": "Studio North",
     "organisation_id": "ORG-009",
     "seniority_level": "Mid",
-    "preferred_methods": ["interview", "concept testing"],
+    "preferred_methods": [
+      "interview",
+      "concept testing"
+    ],
     "availability": "Wednesday afternoons",
     "status": "active",
     "last_touchpoint": "",
     "last_touchpoint_date": "",
     "participation_history": [],
-    "notes": "She/her. Has a strong eye for visual design — notices inconsistencies in UI instantly. Shops heavily in fashion and home categories. Valuable for concept testing and visual design feedback.",
+    "notes": "She/her. Has a strong eye for visual design \u2014 notices inconsistencies in UI instantly. Shops heavily in fashion and home categories. Valuable for concept testing and visual design feedback.",
     "date_added": "2026-03-13"
   },
   {
@@ -238,7 +318,9 @@
     "organisation": "Delta Storage Ltd",
     "organisation_id": "ORG-010",
     "seniority_level": "Mid",
-    "preferred_methods": ["usability test"],
+    "preferred_methods": [
+      "usability test"
+    ],
     "availability": "weekend afternoons",
     "status": "active",
     "last_touchpoint": "",

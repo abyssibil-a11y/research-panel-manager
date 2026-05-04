@@ -1,0 +1,20 @@
+{
+  "_readme": "Copy the 'mcpServers' block into ~/Library/Application Support/Claude/claude_desktop_config.json then restart Claude Desktop.",
+
+  "mcpServers": {
+    "research-panel-manager": {
+      "_readme_command": "Full path to uv — run `which uv` in your terminal to find yours.",
+      "command": "/Users/YOUR_USERNAME/.local/bin/uv",
+
+      "_readme_args": "uv downloads Python 3.11 automatically and installs the three packages listed with --with. The last arg is the absolute path to mcp_server.py.",
+      "args": [
+        "run",
+        "--python", "3.11",
+        "--with", "mcp",
+        "--with", "anthropic",
+        "--with", "python-dotenv",
+        "/absolute/path/to/research-panel-manager/mcp_server.py"
+      ]
+    }
+  }
+}

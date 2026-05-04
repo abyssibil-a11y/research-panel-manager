@@ -1,0 +1,19 @@
+# pyproject.toml
+#
+# 💡 WHY THIS FILE EXISTS:
+#    The MCP SDK requires Python 3.10+, but our Gradio app runs on Python 3.9.
+#    This file tells `uv` which Python and packages to use when running the
+#    MCP server — completely separate from the Gradio environment.
+#
+#    The Gradio app (python3 app.py) is unaffected by this file.
+#    The MCP server (uv run mcp_server.py) uses this file automatically.
+
+[project]
+name = "research-panel-manager-mcp"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "mcp>=1.0.0",
+    "anthropic>=0.40.0",
+    "python-dotenv>=1.0.0",
+]

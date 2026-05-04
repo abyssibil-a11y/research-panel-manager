@@ -132,7 +132,6 @@ with gr.Blocks(
     # ── Chat window ───────────────────────────────────────────────
     chatbot = gr.Chatbot(
         value=[],
-        type="tuples",          # keeps the [user, bot] format our code uses
         height=460,
         show_copy_button=True,  # lets users copy Claude's responses
         bubble_full_width=False,  # tighter bubbles, easier to read
@@ -184,6 +183,7 @@ with gr.Blocks(
         fn=import_csv,
         inputs=[csv_upload],
         outputs=[import_result],
+        api_name=False,
     )
 
     # ── Clear button ──────────────────────────────────────────────
@@ -200,16 +200,19 @@ with gr.Blocks(
         fn=respond,
         inputs=[msg_input, chatbot, session_state],
         outputs=[msg_input, chatbot, session_state],
+        api_name=False,
     )
     msg_input.submit(
         fn=respond,
         inputs=[msg_input, chatbot, session_state],
         outputs=[msg_input, chatbot, session_state],
+        api_name=False,
     )
     clear_btn.click(
         fn=clear_chat,
         inputs=[session_state],
         outputs=[chatbot, session_state],
+        api_name=False,
     )
 
 
