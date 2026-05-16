@@ -1,14 +1,3 @@
----
-title: Research Panel Manager
-emoji: 🧑‍🔬
-colorFrom: purple
-colorTo: indigo
-sdk: gradio
-sdk_version: 5.25.0
-app_file: app.py
-pinned: false
----
-
 # User Research Panel Manager
 
 An AI-powered research ops tool that helps product teams manage participants, run intelligent screening, draft outreach emails, and capture session insights — all through a conversational interface.
@@ -78,54 +67,6 @@ This tool automates the tedious parts while keeping researchers in control of th
 
 ---
 
-## Using in chat UI
-
-### 1. Clone the repo
-
-```bash
-git clone https://github.com/abyssibil-a11y/research-panel-manager.git
-cd research-panel-manager
-```
-
-### 2. Install dependencies
-
-```bash
-pip install anthropic gradio resend python-dotenv
-```
-
-### 3. Set up environment variables
-
-Create a `.env.local` file in the root directory:
-
-```
-ANTHROPIC_API_KEY=your_key_here
-RESEND_API_KEY=your_key_here
-```
-
-### 4. Run the app
-
-```bash
-python app.py
-```
-
-Or explore in the notebook:
-
-```bash
-jupyter notebook main.ipynb
-```
-
-### 5. Try it out
-
-Once running:
-1. **Add a participant** (use the "Participants" tab or import `sample_participants.csv`)
-2. **Create a project** with target criteria (e.g., "Need 5 PMs for mobile usability study")
-3. **Ask the agent** in the chat: "Screen the panel for this project and show me the top matches"
-4. **Review** the agent's reasoning and draft outreach emails
-
-The agent will explain *why* each participant is a good or poor fit, not just return a list.
-
----
-
 ## Using as an MCP server
 
 Connect the panel manager directly to Claude Desktop so you can call its tools from any conversation — no chat UI needed.
@@ -186,6 +127,54 @@ uv run test_mcp_tools.py
 ```
 
 Runs 32 checks across all 6 tools and cleans up any test data it creates.
+
+---
+
+## Using in chat UI
+
+### 1. Clone the repo
+
+```bash
+git clone https://github.com/abyssibil-a11y/research-panel-manager.git
+cd research-panel-manager
+```
+
+### 2. Install dependencies
+
+```bash
+pip install anthropic gradio resend python-dotenv
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file in the root directory:
+
+```
+ANTHROPIC_API_KEY=your_key_here
+RESEND_API_KEY=your_key_here
+```
+
+### 4. Run the app
+
+```bash
+python app.py
+```
+
+Or explore in the notebook:
+
+```bash
+jupyter notebook main.ipynb
+```
+
+### 5. Try it out
+
+Once running:
+1. **Add a participant** (use the "Participants" tab or import `sample_participants.csv`)
+2. **Create a project** with target criteria (e.g., "Need 5 PMs for mobile usability study")
+3. **Ask the agent** in the chat: "Screen the panel for this project and show me the top matches"
+4. **Review** the agent's reasoning and draft outreach emails
+
+The agent will explain *why* each participant is a good or poor fit, not just return a list.
 
 ---
 
